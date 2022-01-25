@@ -15,7 +15,6 @@ GameObject:
   - component: {fileID: 7309754975082689077}
   - component: {fileID: 7309754975082689078}
   - component: {fileID: 7309754975082689082}
-  - component: {fileID: 7309754975082689087}
   m_Layer: 3
   m_Name: Player
   m_TagString: Player
@@ -124,7 +123,7 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.14000937, y: 0.1}
+  m_Offset: {x: 0.01, y: 0.1}
   m_Size: {x: 0.53922474, y: 0.19226062}
   m_Direction: 1
 --- !u!70 &7309754975082689077
@@ -140,7 +139,7 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.15, y: 0.47}
+  m_Offset: {x: 0.06, y: 0.47}
   m_Size: {x: 0.57, y: 0.6942991}
   m_Direction: 0
 --- !u!61 &7309754975082689078
@@ -156,10 +155,10 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.14276397, y: 0.94}
+  m_Offset: {x: 0.01, y: 0.94}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0}
+    pivot: {x: 0.3467, y: 0}
     oldSize: {x: 0.96875, y: 1.15625}
     newSize: {x: 0.96875, y: 1.15625}
     adaptiveTilingThreshold: 0.5
@@ -187,31 +186,20 @@ MonoBehaviour:
   m_AirControl: 1
   m_WhatIsGround:
     serializedVersion: 2
-    m_Bits: 183
-  m_GroundCheck: {fileID: 7309754975746521891}
-  m_CeilingCheck: {fileID: 7309754975235586271}
+    m_Bits: 167
+  m_GroundCheck: {fileID: 7309754975235586271}
+  m_CeilingCheck: {fileID: 7309754975746521891}
   m_CrouchDisableCollider: {fileID: 7309754975082689078}
+  _dashSpeed: 15
+  _dashLength: 0.3
+  _dashBufferLength: 1
+  runSpeed: 20
   OnLandEvent:
     m_PersistentCalls:
       m_Calls: []
   OnCrouchEvent:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &7309754975082689087
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7309754975082689079}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2ef5fe1b6c12e1c49bbb798e6f1fe0ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  controller: {fileID: 7309754975082689082}
-  rb: {fileID: 7309754975082689083}
-  runSpeed: 20
 --- !u!1 &7309754975235586264
 GameObject:
   m_ObjectHideFlags: 0
@@ -236,7 +224,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7309754975235586264}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.149, y: 1.05, z: 0}
+  m_LocalPosition: {x: -0.005, y: 0.723, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7309754975082689080}
@@ -266,7 +254,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7309754975746521948}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.149, y: 0.048, z: 0}
+  m_LocalPosition: {x: -0.005, y: 0.023, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7309754975082689080}

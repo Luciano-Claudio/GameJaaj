@@ -8,13 +8,16 @@ public class PlayerMovement : MonoBehaviour
 
     public CharacterController controller;
     public Rigidbody2D rb;
+
+    [SerializeField] private float _dashBufferLength = .1f;
+    private float _dashBufferCounter;
     //public CinemachineVirtualCamera CamStart;
 
 
 
     public float runSpeed = 20f;
     float horizontalMove = 0f;
-    bool jump = false, crouch = false;
+    bool jump = false, crouch = false, dash = false;
     private Animator animator;
 
     void Awake()
@@ -28,25 +31,31 @@ public class PlayerMovement : MonoBehaviour
 
         //animator.SetFloat("Speed", Mathf.Abs(horizontalMove));
         //animator.SetFloat("yVelocity", rb.velocity.y);
-        if (Input.GetButtonDown("Jump") || Input.GetKeyDown(KeyCode.W))
+        if (Input.GetButtonDown("Jump"))
             jump = true;
 
-        if (Input.GetButtonDown("Crouch") || Input.GetKeyDown(KeyCode.LeftControl))
+        if (Input.GetButtonDown("Crouch"))
         {
             //animator.SetBool("IsCrouching", true);
             crouch = true;
         }
-        else if (Input.GetButtonUp("Crouch") || Input.GetKeyUp(KeyCode.LeftControl))
+        else if (Input.GetButtonUp("Crouch"))
         {
             //animator.SetBool("IsCrouching", false);
             crouch = false;
         }
+        if (Input.GetButtonDown("Dash"))
+        {
+            _dashBufferCounter = _dashBufferLength;
+            dash = true;
+        }
+        else _dashBufferCounter -= Time.deltaTime;
     }
 
     void FixedUpdate()
     {
         //Mover o personagem
-        controller.Move(horizontalMove * Time.deltaTime, crouch, jump);
-        jump = false;
+        //controller.Move(horizontalMove * Time.deltaTime, crouch, jump, dash);
+        jump = dash = false;
     }
 }

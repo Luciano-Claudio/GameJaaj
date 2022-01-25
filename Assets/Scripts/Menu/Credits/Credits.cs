@@ -4,7 +4,7 @@ public class Credits : MonoBehaviour
 {
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetButtonDown("Jump"))
             Menu.menu.CloseCredits();
     }
 }

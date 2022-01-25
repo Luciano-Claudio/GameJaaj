@@ -13,7 +13,6 @@ public class Config : MonoBehaviour
     public Slider Volume, Music;
     public Toggle FullscreenTogle;
     public Animator anim;
-    public Texture2D CursorArrow;
 
     bool fullscr = true, pause=false;
     private GameObject lastselect;
@@ -35,9 +34,8 @@ public class Config : MonoBehaviour
         }
         FullscreenTogle.isOn = fullscr;
 
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
-        Cursor.SetCursor(CursorArrow, Vector2.zero, CursorMode.ForceSoftware);
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
 
         lastselect = new GameObject();
 
@@ -63,8 +61,6 @@ public class Config : MonoBehaviour
 
     public void OpenPause()
     {
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
         PauseMenuUI.SetActive(true);
         EventSystem.current.SetSelectedGameObject(StartPauseBtn);
         Time.timeScale = 0f;
@@ -74,9 +70,6 @@ public class Config : MonoBehaviour
     {
         PauseMenuUI.SetActive(false);
 
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
-        Cursor.SetCursor(CursorArrow, Vector2.zero, CursorMode.ForceSoftware);
         Time.timeScale = 1f;
         pause = false;
     }
