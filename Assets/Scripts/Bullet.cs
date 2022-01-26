@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    public float Speed = 2f;
+    private float Speed = 30f;
     Transform EnemyGun;
     int direction;
 
@@ -12,7 +12,7 @@ public class Bullet : MonoBehaviour
     {
         EnemyGun = GetComponentInParent<Transform>();
         direction = EnemyGun.transform.localScale.x <= 0 ? 1 : -1;
-        Destroy(gameObject, 5f);
+        Destroy(gameObject, .5f);
     }
 
     void Update()

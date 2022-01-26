@@ -5,7 +5,7 @@ m_ProjectFiles:
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 637786639685224152
+      ticks: 637787537121798656
     m_Hash: 1255288405
   m_LockFileStatus:
     m_FilePath: C:/Users/engli/Desktop/ArquiInimigo/Arqui-Inimigo/Packages/packages-lock.json
@@ -13,7 +13,7 @@ m_ProjectFiles:
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 637786639685694082
+      ticks: 637787537121918588
     m_Hash: 3740183203
 m_EmbeddedPackageManifests:
   m_ManifestsStatus: {}

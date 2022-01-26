@@ -28,7 +28,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7116628928404478802}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &516463470
 GameObject:
@@ -40,7 +40,7 @@ GameObject:
   m_Component:
   - component: {fileID: 516463471}
   m_Layer: 6
-  m_Name: Foot
+  m_Name: FootOne
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -54,11 +54,41 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 516463470}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.074, y: -0.029, z: 0}
+  m_LocalPosition: {x: 0.284, y: -0.009, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7116628928404478802}
   m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2036665877
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2036665878}
+  m_Layer: 6
+  m_Name: FootTwo
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2036665878
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2036665877}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.274, y: -0.009, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 7116628928404478802}
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7116628928206864592
 GameObject:
@@ -102,9 +132,9 @@ GameObject:
   - component: {fileID: 7116628928404478801}
   - component: {fileID: 7116628928404478800}
   - component: {fileID: 7116628928404478807}
-  - component: {fileID: 7116628928404478803}
   - component: {fileID: 7116628928404478806}
   - component: {fileID: 577980295}
+  - component: {fileID: 889119013}
   m_Layer: 6
   m_Name: Soldier1
   m_TagString: Enemy
@@ -121,11 +151,12 @@ Transform:
   m_GameObject: {fileID: 7116628928404478805}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 2.91, y: -3.51, z: 0}
-  m_LocalScale: {x: 1.346195, y: 1.346195, z: 1.346195}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 7116628929880341456}
   - {fileID: 7116628928206864593}
   - {fileID: 516463471}
+  - {fileID: 2036665878}
   - {fileID: 58425001}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -194,8 +225,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.14334966, y: 0.57}
-  m_Size: {x: 0.6820506, y: 1.15625}
+  m_Offset: {x: -0.0015518665, y: 0.65200186}
+  m_Size: {x: 0.64515424, y: 0.99224615}
   m_Direction: 0
 --- !u!50 &7116628928404478807
 Rigidbody2D:
@@ -212,28 +243,12 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 5
+  m_GravityScale: 3
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!70 &7116628928404478803
-CapsuleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7116628928404478805}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: -1.44, y: 0.56}
-  m_Size: {x: 3.44, y: 1.15625}
-  m_Direction: 1
 --- !u!114 &7116628928404478806
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -248,9 +263,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hasGround: {fileID: 7116628929880341456}
   hasWall: {fileID: 7116628928206864593}
-  Foot: {fileID: 516463471}
+  FootOne: {fileID: 516463471}
+  FootTwo: {fileID: 2036665878}
   Gun: {fileID: 58425001}
-  Player: {fileID: 0}
   Bullet: {fileID: 3604190285717194226, guid: f87d54615f20a284e8c6bd9bb92bea8f, type: 3}
   ShootRange: 5
   ViewRange: 8
@@ -259,10 +274,9 @@ MonoBehaviour:
   ShootTime: 1
   FlipTime: 1
   JumpTime: 1
-  m_JumpForce: 800
+  m_JumpForce: 575
   yDist: 1
-  _hole: 0
-  _wall: 0
+  _obstacleHole: 0
   _fastChase: 0
 --- !u!95 &577980295
 Animator:
@@ -283,6 +297,22 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!70 &889119013
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7116628928404478805}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 6200000, guid: 486822052cdb9754385ca036af5d6ab2, type: 2}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.01, y: 0.08}
+  m_Size: {x: 0.53, y: 0.17}
+  m_Direction: 1
 --- !u!1 &7116628929880341463
 GameObject:
   m_ObjectHideFlags: 0
@@ -292,6 +322,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7116628929880341456}
+  - component: {fileID: 644844235}
+  - component: {fileID: 644844234}
   m_Layer: 6
   m_Name: HasGround
   m_TagString: Untagged
@@ -313,3 +345,31 @@ Transform:
   m_Father: {fileID: 7116628928404478802}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!58 &644844235
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7116628929880341463}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.11
+--- !u!114 &644844234
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7116628929880341463}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8cc79d7163177ab4ba128d8a4e29e502, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

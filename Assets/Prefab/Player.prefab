@@ -1,5 +1,35 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &825328886
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 825328887}
+  m_Layer: 3
+  m_Name: Gun
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &825328887
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 825328886}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.6196, y: 0.7214, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 7309754975082689080}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7309754975082689079
 GameObject:
   m_ObjectHideFlags: 0
@@ -15,6 +45,7 @@ GameObject:
   - component: {fileID: 7309754975082689077}
   - component: {fileID: 7309754975082689078}
   - component: {fileID: 7309754975082689082}
+  - component: {fileID: 731272440}
   m_Layer: 3
   m_Name: Player
   m_TagString: Player
@@ -31,10 +62,11 @@ Transform:
   m_GameObject: {fileID: 7309754975082689079}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -5.1169543, y: -2.42, z: 0}
-  m_LocalScale: {x: 1.3461952, y: 1.3461952, z: 1.3461952}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 7309754975235586271}
   - {fileID: 7309754975746521891}
+  - {fileID: 825328887}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -77,8 +109,8 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: d6f60d5dd29bec3409e49f514c525df3, type: 3}
+  m_SortingOrder: 10
+  m_Sprite: {fileID: 21300000, guid: 79984126534fd534ca2b42ddcc77ec51, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -104,7 +136,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 5
+  m_GravityScale: 3
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
@@ -139,8 +171,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.06, y: 0.47}
-  m_Size: {x: 0.57, y: 0.6942991}
+  m_Offset: {x: 0, y: 0.44}
+  m_Size: {x: 0.61, y: 0.77}
   m_Direction: 0
 --- !u!61 &7309754975082689078
 BoxCollider2D:
@@ -158,8 +190,8 @@ BoxCollider2D:
   m_Offset: {x: 0.01, y: 0.94}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.3467, y: 0}
-    oldSize: {x: 0.96875, y: 1.15625}
+    pivot: {x: 0.379, y: 0}
+    oldSize: {x: 1.03125, y: 1.171875}
     newSize: {x: 0.96875, y: 1.15625}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -180,26 +212,51 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4954ab58cc02d4143945f598557e89bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_JumpForce: 800
+  m_JumpForce: 500
   m_CrouchSpeed: 0.36
   m_MovementSmoothing: 0.05
   m_AirControl: 1
   m_WhatIsGround:
     serializedVersion: 2
-    m_Bits: 167
-  m_GroundCheck: {fileID: 7309754975235586271}
-  m_CeilingCheck: {fileID: 7309754975746521891}
+    m_Bits: 174
+  m_GroundCheckOne: {fileID: 7309754975235586271}
+  m_GroundCheckTwo: {fileID: 7309754975746521891}
   m_CrouchDisableCollider: {fileID: 7309754975082689078}
-  _dashSpeed: 15
-  _dashLength: 0.3
-  _dashBufferLength: 1
+  Fade: {fileID: 3997920349499932635, guid: d3bd0cc9fcae7984cbfea79368f13d45, type: 3}
+  Bullet: {fileID: 3662477878804405810, guid: 4c732e19b1a424947a08689e18ff88b1, type: 3}
+  Gun: {fileID: 825328887}
+  _dashSpeed: 10
+  _dashLength: 0.2
+  _dashCount: 1
   runSpeed: 20
+  _jumpCount: 0.5
+  _fireCount: 0.5
+  m_Grounded: 0
   OnLandEvent:
     m_PersistentCalls:
       m_Calls: []
   OnCrouchEvent:
     m_PersistentCalls:
       m_Calls: []
+--- !u!95 &731272440
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7309754975082689079}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 8665968ea991c114dbfa83a984743244, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &7309754975235586264
 GameObject:
   m_ObjectHideFlags: 0
@@ -210,7 +267,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7309754975235586271}
   m_Layer: 3
-  m_Name: CellingCheck
+  m_Name: GroundCheckOne
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -224,7 +281,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7309754975235586264}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.005, y: 0.723, z: 0}
+  m_LocalPosition: {x: 0.228, y: 0.01, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7309754975082689080}
@@ -240,7 +297,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7309754975746521891}
   m_Layer: 3
-  m_Name: GroundCheck
+  m_Name: GroundCheckTwo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -254,7 +311,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7309754975746521948}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.005, y: 0.023, z: 0}
+  m_LocalPosition: {x: -0.219, y: 0.01, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7309754975082689080}
