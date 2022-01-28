@@ -12,11 +12,17 @@ public class CharacterController : MonoBehaviour
     [SerializeField] private Transform m_GroundCheckOne;                           // Uma marcação de posição onde verifica se o jogador está no chão.
     [SerializeField] private Transform m_GroundCheckTwo;                           // Uma marcação de posição onde verifica se o jogador está no chão.
     [SerializeField] private Collider2D m_CrouchDisableCollider;                // Um colisor que será desativado ao agachar
+    [SerializeField] private int Life = 10;
+    private int _lifeAux = 10;
+    private bool _dead = false;
 
 
     [SerializeField] private GameObject Fade;
     [SerializeField] private GameObject Bullet;
     [SerializeField] private Transform Gun;
+    [SerializeField] private Sprite Fire1;
+    [SerializeField] private Sprite Fire2;
+    private SpriteRenderer Gun_Explosion;
 
     private float _timeFadeSpawns;
     private float _startTimeFadeSpawns = .05f;
@@ -49,9 +55,10 @@ public class CharacterController : MonoBehaviour
     private bool fireOn = false;
 
 
-    private bool _isCrouch = false;
-    private float _horizontalDirection = 0, _horizontal;
-    private float _verticalDirection = 0, _vertical;
+    public bool _isCrouch = false;
+    private float _horizontalDirection = 0;
+    private float _verticalDirection = 0;
+    public float _horizontal, _vertical;
 
     const float k_GroundedRadius = .2f; // Constante de um raio do círculo de sobreposição para determinar se é chão
     [SerializeField] private bool m_Grounded;            // Se o jogador está ou não no chão
@@ -61,6 +68,9 @@ public class CharacterController : MonoBehaviour
     private float vel;
     private Animator animator;
     float auxGrav, auxDrag;
+
+    public bool hide { get; private set; }
+
 
     [Header("Events")]
     [Space]
@@ -78,6 +88,7 @@ public class CharacterController : MonoBehaviour
     {
         m_Rigidbody2D = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+        Gun_Explosion = Gun.GetComponent<SpriteRenderer>();
 
         if (OnLandEvent == null)
             OnLandEvent = new UnityEvent();
@@ -88,58 +99,68 @@ public class CharacterController : MonoBehaviour
         auxGrav = m_Rigidbody2D.gravityScale;
         auxDrag = m_Rigidbody2D.drag;
 
+        hide = false;
     }
 
     void Update()
     {
-        _horizontal = GetInput().x;
-        _vertical = GetInput().y;
-        horizontalMove = Input.GetAxisRaw("Horizontal") * runSpeed;
-
-        animator.SetFloat("Speed", Mathf.Abs(horizontalMove));
-        animator.SetBool("IsJumping", !m_Grounded);
-        animator.SetBool("IsDashing", _isDashing);
-        if (!_isDashing) animator.SetFloat("yVelocity", m_Rigidbody2D.velocity.y);
-
-
-
-        if (Input.GetButtonDown("Jump") && _jumpTemp <= 0 && !_isCrouch)
+        if (Life <= 0) _dead = true;
+        if (!_dead)
         {
-            _jumpTemp = _jumpCount;
-            _isJump = _isJumping = true;
+                _horizontal = GetInput().x;
+                _vertical = GetInput().y;
+                horizontalMove = Input.GetAxisRaw("Horizontal") * runSpeed;
 
+                animator.SetFloat("Speed", Mathf.Abs(horizontalMove));
+                animator.SetBool("IsJumping", !m_Grounded);
+                animator.SetBool("IsDashing", _isDashing);
+                if (!_isDashing) animator.SetFloat("yVelocity", m_Rigidbody2D.velocity.y);
+
+
+
+                if (Input.GetButtonDown("Jump") && _jumpTemp <= 0 && !_isCrouch)
+                {
+                    _jumpTemp = _jumpCount;
+                    _isJump = _isJumping = true;
+
+                }
+                else if (_jumpTemp > 0) _jumpTemp -= Time.deltaTime;
+
+                if (Input.GetButtonDown("Crouch"))
+                {
+                    _isCrouch = true;
+                }
+                else if (Input.GetButtonUp("Crouch"))
+                {
+                    _isCrouch = false;
+                    animator.SetBool("xInput", false);
+                    animator.SetBool("yInput", false);
+                }
+                if (Input.GetButtonDown("Dash") && _dashTemp <= 0)
+                {
+                    _dashTemp = _dashCount;
+                    _isDashing = true;
+                    StartCoroutine(InputDashing());
+                    m_Rigidbody2D.velocity = Vector2.zero;
+                }
+                else if (_dashTemp > 0) _dashTemp -= Time.deltaTime;
+
+                if (Input.GetButton("Fire1") && _fireTemp <= 0 && !_isDashing && m_Grounded && !fallOn && !fireOn)
+                {
+                    _fireTemp = _fireCount;
+                    StartCoroutine(Fire());
+                }
+                else if (_fireTemp > 0) _fireTemp -= Time.deltaTime;
+
+                if (_isDashing)
+                    _dashInputTime -= Time.deltaTime;
+            
         }
-        else if (_jumpTemp > 0) _jumpTemp -= Time.deltaTime;
-
-        if (Input.GetButtonDown("Crouch"))
+        else
         {
-            _isCrouch = true;
+            this.enabled = false;
+            animator.SetBool("IsDead", true);
         }
-        else if (Input.GetButtonUp("Crouch"))
-        {
-            _isCrouch = false;
-            animator.SetBool("xInput", false);
-            animator.SetBool("yInput", false);
-        }
-        if (Input.GetButtonDown("Dash") && _dashTemp <= 0)
-        {
-            _dashTemp = _dashCount;
-            _isDashing = true;
-            StartCoroutine(InputDashing());
-            m_Rigidbody2D.velocity = Vector2.zero;
-        }
-        else if (_dashTemp > 0) _dashTemp -= Time.deltaTime;
-
-        if (Input.GetButtonDown("Fire1") && _fireTemp <= 0 && !_isDashing && m_Grounded && !fallOn && !fireOn)
-        {
-            _fireTemp = _fireCount;
-            StartCoroutine(Fire());
-        }
-        else if (_fireTemp > 0) _fireTemp -= Time.deltaTime;
-
-        if (_isDashing)
-            _dashInputTime -= Time.deltaTime;
-
     }
 
     private void FixedUpdate()
@@ -194,11 +215,18 @@ public class CharacterController : MonoBehaviour
     private IEnumerator Fire()
     {
         fireOn = true;
-        animator.SetBool("Fire", true);
+        if (m_Rigidbody2D.velocity.x != 0)
+        {
+            Gun_Explosion.sprite = Fire1;
+            yield return new WaitForSeconds(.02f);
+            Gun_Explosion.sprite = Fire2;
+            yield return new WaitForSeconds(.02f);
+            Gun_Explosion.sprite = null;
+        }
+        else animator.SetBool("Fire", true);
         GameObject bullet = Instantiate(Bullet);
         bullet.transform.position = Gun.position;
-        bullet.transform.parent = gameObject.transform;
-        yield return new WaitForSeconds(.3f);
+        yield return new WaitForSeconds(.26f);
         animator.SetBool("Fire", false);
         fireOn = false;
     }
@@ -249,7 +277,12 @@ public class CharacterController : MonoBehaviour
         _dashInputTime = .1f;
         _horizontalDirection = _verticalDirection = 0;
     }
-    public void Move(float move, bool crouch, bool jump, bool dash)
+    public void LessLife()
+    {
+        Life--;
+        animator.SetTrigger("Damaged");
+    }
+    void Move(float move, bool crouch, bool jump, bool dash)
     {
 
         // só controle o player se estiver no chão ou airControl estiver ativado
@@ -294,7 +327,7 @@ public class CharacterController : MonoBehaviour
                     }
                     if(_horizontal != 0) animator.SetBool("xInput", true);
                     else animator.SetBool("xInput", false);
-                    if (_vertical != 0) animator.SetBool("yInput", true);
+                    if (_vertical > 0) animator.SetBool("yInput", true);
                     else animator.SetBool("yInput", false);
                     // Tira a velocidade
                     vel = 0;
@@ -361,5 +394,18 @@ public class CharacterController : MonoBehaviour
         Vector3 theScale = transform.localScale;
         theScale.x *= -1;
         transform.localScale = theScale;
+    }
+
+    public void ChangeHide(bool valor)
+    {
+        hide = valor;
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Bullet"))
+        {
+            LessLife();
+        }
     }
 }

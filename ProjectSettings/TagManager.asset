@@ -6,6 +6,10 @@ TagManager:
   tags:
   - Enemy
   - Hole
+  - Bullet
+  - Box
+  - Hittler
+  - Ground
   layers:
   - Default
   - TransparentFX
@@ -16,8 +20,8 @@ TagManager:
   - Enemy
   - Ground
   - Fade
-  - 
-  - 
+  - Box
+  - Hittler
   - 
   - 
   - 

@@ -5,18 +5,19 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     private float Speed = 30f;
-    Transform EnemyGun;
-    int direction;
 
     void Start()
     {
-        EnemyGun = GetComponentInParent<Transform>();
-        direction = EnemyGun.transform.localScale.x <= 0 ? 1 : -1;
-        Destroy(gameObject, .5f);
+        Destroy(gameObject, .3f);
     }
 
     void Update()
     {
-        transform.Translate(new Vector2(0, direction) * Time.deltaTime * Speed);
+        transform.Translate(new Vector2(1, 0) * Time.deltaTime * Speed);
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        Destroy(gameObject);
     }
 }

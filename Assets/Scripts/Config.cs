@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
@@ -14,11 +15,16 @@ public class Config : MonoBehaviour
     public Toggle FullscreenTogle;
     public Animator anim;
 
+    public Animator Confirmar, Voltar;
+
     bool fullscr = true, pause=false;
     private GameObject lastselect;
+    private CharacterController player;
     private AudioSource _audioS;
     void Start()
     {
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<CharacterController>();
+
         //PlayerPrefs.DeleteAll();
         if (PlayerPrefs.GetInt("HasFullscreen") == 1)
             fullscr = Convert.ToBoolean(PlayerPrefs.GetInt("_fullscreen"));
@@ -57,6 +63,16 @@ public class Config : MonoBehaviour
             EventSystem.current.SetSelectedGameObject(lastselect);
         else
             lastselect = EventSystem.current.currentSelectedGameObject;
+
+
+        if (Input.GetKeyDown(KeyCode.X))
+            Confirmar.SetBool("Selected", true);
+        else if (Input.GetKeyUp(KeyCode.X))
+            Confirmar.SetBool("Selected", false);
+        else if (Input.GetKeyDown(KeyCode.Z))
+            Voltar.SetBool("Selected", true);
+        else if (Input.GetKeyUp(KeyCode.Z))
+            Voltar.SetBool("Selected", false);
     }
 
     public void OpenPause()
@@ -64,6 +80,7 @@ public class Config : MonoBehaviour
         PauseMenuUI.SetActive(true);
         EventSystem.current.SetSelectedGameObject(StartPauseBtn);
         Time.timeScale = 0f;
+        player.enabled = false;
         pause = true;
     }
     public void ClosePause()
@@ -71,6 +88,7 @@ public class Config : MonoBehaviour
         PauseMenuUI.SetActive(false);
 
         Time.timeScale = 1f;
+        player.enabled = true;
         pause = false;
     }
 

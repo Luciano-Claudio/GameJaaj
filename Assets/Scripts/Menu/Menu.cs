@@ -14,6 +14,7 @@ public class Menu : MonoBehaviour
     public Toggle FullscreenTogle;
     public Slider Volume, Music, LoadingSlider;
     public Text LoadingTxt;
+    public Animator Confirmar, Voltar;
 
     bool fullscr = true;
     private GameObject lastselect;
@@ -51,10 +52,22 @@ public class Menu : MonoBehaviour
 
     void Update()
     {
+
+
         if (EventSystem.current.currentSelectedGameObject == null)
             EventSystem.current.SetSelectedGameObject(lastselect);
         else
             lastselect = EventSystem.current.currentSelectedGameObject;
+
+
+        if (Input.GetKeyDown(KeyCode.X))
+            Confirmar.SetBool("Selected", true);
+        else if (Input.GetKeyUp(KeyCode.X))
+            Confirmar.SetBool("Selected", false);
+        else if (Input.GetKeyDown(KeyCode.Z))
+            Voltar.SetBool("Selected", true);
+        else if (Input.GetKeyUp(KeyCode.Z))
+            Voltar.SetBool("Selected", false);
     }
 
     public void PlayButton(string scene)

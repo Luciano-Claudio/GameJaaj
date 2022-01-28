@@ -7,6 +7,11 @@ public class EnemyPath : MonoBehaviour
     public Transform hasGround, hasWall, FootOne, FootTwo, Gun;
     public GameObject Bullet;
     private GameObject Player;
+    [SerializeField] private CapsuleCollider2D CapsuleCo1;
+    [SerializeField] private CapsuleCollider2D CapsuleCo2;
+    [SerializeField] private BoxCollider2D BoxCo;
+    private SpriteRenderer spr;
+
     public float ShootRange;
     public float ViewRange;
     public float FastChaseTime = 15f;
@@ -24,7 +29,7 @@ public class EnemyPath : MonoBehaviour
     private int move;
     private bool mustPatrol;
     private bool _hole;
-    private bool _wall;
+    public bool _wall;
     public bool _obstacleHole = false;
     private Animator anim;
     [SerializeField] private bool _fastChase;
@@ -35,9 +40,16 @@ public class EnemyPath : MonoBehaviour
     private bool _fall = false;
     private bool _prepairJump = false;
     private bool prepairOn = false;
+    [SerializeField] private bool _chase = false;
     private float changeChase = .2f;
     private bool _chaseChange = false;
     private bool _canChaseChange = false;
+    private int life = 2;
+    private bool _dead;
+    private bool hide;
+
+    public bool Spawn = false;
+
 
     void Awake()
     {
@@ -49,10 +61,19 @@ public class EnemyPath : MonoBehaviour
         move = 1;
         mustPatrol = true;
         anim = GetComponent<Animator>();
+        spr = GetComponent<SpriteRenderer>();
     }
 
     void Update()
     {
+        if (life <= 0) _dead = true;
+        if (_dead)
+        {
+            anim.SetBool("IsDead", true);
+            spr.sortingOrder = 3;
+            this.enabled = CapsuleCo1.enabled = CapsuleCo2.enabled = false;
+            BoxCo.enabled = true;
+        }
         _distToPlayer = Vector2.Distance(transform.position, Player.transform.position);
 
         anim.SetFloat("Speed", Mathf.Abs(rb.velocity.x));
@@ -65,9 +86,12 @@ public class EnemyPath : MonoBehaviour
     void FixedUpdate()
     {
         Physics2D.IgnoreLayerCollision(3, 6);
+        Physics2D.IgnoreLayerCollision(6, 6);
 
+        hide = Player.GetComponent<CharacterController>().hide;
 
-        if (_distToPlayer <= ViewRange && Mathf.Abs(transform.position.y - Player.transform.position.y) <= yDist && mustPatrol)
+        if (hide) mustPatrol = true;
+        else if (_distToPlayer <= ViewRange && Mathf.Abs(transform.position.y - Player.transform.position.y) <= yDist && mustPatrol)
         {
             if (((Player.transform.position.x > transform.position.x && move > 0)
                 || (Player.transform.position.x < transform.position.x && move < 0)) && IsGround() && !_wall)
@@ -75,10 +99,11 @@ public class EnemyPath : MonoBehaviour
                 mustPatrol = false;
             }
         }
-
+        else if (Spawn) mustPatrol = false;
         if (mustPatrol)
         {
             int i;
+            _chase = false;
             CheckColision();
             i = Random.Range(1, 6000);
             if (i == 1 || _hole || _wall)
@@ -88,7 +113,9 @@ public class EnemyPath : MonoBehaviour
             }
 
             if (_look && !lookOn && IsGround())
+            {
                 StartCoroutine(Look());
+            }
             else if (!lookOn && !_look)
                 rb.velocity = new Vector2(_velMove * move, rb.velocity.y);
         }
@@ -121,7 +148,7 @@ public class EnemyPath : MonoBehaviour
             rb.velocity = Vector2.zero;
             anim.SetBool("Look", true);
 
-            if (_distToPlayer <= ViewRange && Mathf.Abs(transform.position.y - Player.transform.position.y) <= yDist && mustPatrol)//adicionar caixa dps
+            if (_distToPlayer <= ViewRange && Mathf.Abs(transform.position.y - Player.transform.position.y) <= yDist && mustPatrol && !hide)
             {
                 anim.SetBool("Look", false);
                 _look = lookOn = false;
@@ -140,17 +167,21 @@ public class EnemyPath : MonoBehaviour
                 Flip();
         }
     }
+
     private IEnumerator Shoot()//adicionar caixa dps
     {
         if (!fallOn && !prepairOn && !shootOn)
         {
+            Vector3 aux;
             shootOn = true;
             rb.velocity = Vector2.zero;
             anim.SetBool("Shoot", true);
             GameObject bullet = Instantiate(Bullet);
             bullet.transform.position = Gun.position;
-            bullet.transform.parent = gameObject.transform;
-            yield return new WaitForSeconds(anim.GetCurrentAnimatorStateInfo(0).length / 2);
+            aux = bullet.transform.eulerAngles;
+            if (transform.localScale.x < 0) aux.z = 180;
+            bullet.transform.eulerAngles = aux;
+            yield return new WaitForSeconds(anim.GetCurrentAnimatorStateInfo(0).length);
             rb.velocity = Vector2.zero;
             anim.SetBool("Shoot", false);
             shootOn = false;
@@ -182,11 +213,15 @@ public class EnemyPath : MonoBehaviour
             _fall = fallOn = false;
         }
     }
-
+    public void LessLife()
+    {
+        life--;
+        anim.SetTrigger("Damaged");
+    }
     void CheckColision()
     {
         _hole = !Physics2D.Raycast(hasGround.position, Vector2.down, 0.1f) ? true : false;
-        _wall = Physics2D.Raycast(hasWall.position, new Vector2(move, 0), 0.1f) ? true : false;
+        //_wall = Physics2D.Raycast(hasWall.position, new Vector2(move, 0), 0.1f) ? true : false;
     }
 
     bool IsGround()
@@ -211,6 +246,7 @@ public class EnemyPath : MonoBehaviour
 
     void Chase()
     {
+        _chase = true;
         _chaseChange = _fastChase;
         _fastChase = _distToPlayer > ViewRange ? true : false;
         if(_chaseChange != _fastChase && changeChase > 0)
@@ -273,11 +309,4 @@ public class EnemyPath : MonoBehaviour
     }
 
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.CompareTag("Player"))
-        {
-            Debug.Log("entrou");
-        }
-    }
 }
