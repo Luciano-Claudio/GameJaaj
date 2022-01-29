@@ -64,15 +64,17 @@ public class Config : MonoBehaviour
         else
             lastselect = EventSystem.current.currentSelectedGameObject;
 
-
-        if (Input.GetKeyDown(KeyCode.X))
-            Confirmar.SetBool("Selected", true);
-        else if (Input.GetKeyUp(KeyCode.X))
-            Confirmar.SetBool("Selected", false);
-        else if (Input.GetKeyDown(KeyCode.Z))
-            Voltar.SetBool("Selected", true);
-        else if (Input.GetKeyUp(KeyCode.Z))
-            Voltar.SetBool("Selected", false);
+        if (pause)
+        {
+            if (Input.GetKeyDown(KeyCode.X))
+                Confirmar.SetBool("Selected", true);
+            else if (Input.GetKeyUp(KeyCode.X))
+                Confirmar.SetBool("Selected", false);
+            else if (Input.GetKeyDown(KeyCode.Z))
+                Voltar.SetBool("Selected", true);
+            else if (Input.GetKeyUp(KeyCode.Z))
+                Voltar.SetBool("Selected", false);
+        }
     }
 
     public void OpenPause()

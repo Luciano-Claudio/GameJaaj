@@ -78,6 +78,8 @@
     <Compile Include="Assets\Scripts\Config.cs" />
     <Compile Include="Assets\Scripts\IsWall.cs" />
     <Compile Include="Assets\Scripts\Menu\Options\VideoBtn.cs" />
+    <Compile Include="Assets\Scripts\Lamp.cs" />
+    <Compile Include="Assets\Scripts\Cameras\BossRoom\BossCamera.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

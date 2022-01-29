@@ -34,7 +34,7 @@ public class AllyBullet : MonoBehaviour
         }
         else
             dir = new Vector2(direction, 0);
-        Destroy(gameObject, .3f);
+        Destroy(gameObject, .5f);
     }
 
     // Update is called once per frame

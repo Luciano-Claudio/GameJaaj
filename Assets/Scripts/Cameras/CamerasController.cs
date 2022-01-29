@@ -5,6 +5,7 @@ using UnityEngine;
 public class CamerasController : MonoBehaviour
 {
     public static CamerasController instance;
+    float freezeTime = 1;
 
     public GameObject[] cameras;
     private void Awake()
@@ -23,6 +24,15 @@ public class CamerasController : MonoBehaviour
         }
 
         camera.SetActive(true);
+
+        StartCoroutine(FreezingTime());
+    }
+
+    IEnumerator FreezingTime()
+    {
+        Time.timeScale = 0;
+        yield return new WaitForSecondsRealtime(freezeTime);
+        Time.timeScale = 1;
     }
 
 }

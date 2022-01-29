@@ -43,7 +43,7 @@ public class EnemyPath : MonoBehaviour
     private float changeChase = .2f;
     private bool _chaseChange = false;
     private bool _canChaseChange = false;
-    private int life = 2;
+    private int life = 3;
     private bool _dead;
     private bool hide;
 
@@ -66,10 +66,11 @@ public class EnemyPath : MonoBehaviour
         if (_dead)
         {
             anim.SetBool("IsDead", true);
-            anim.SetTrigger("Dead");
             spr.sortingOrder = 3;
-            this.enabled = CapsuleCo1.enabled = CapsuleCo2.enabled = false;
             BoxCo.enabled = true;
+            anim.SetBool("IsJump", false);
+            anim.SetTrigger("Dead");
+            this.enabled = CapsuleCo1.enabled = CapsuleCo2.enabled = false;
         }
         _distToPlayer = Vector2.Distance(transform.position, Player.transform.position);
 
@@ -219,7 +220,8 @@ public class EnemyPath : MonoBehaviour
     public void LessLife()
     {
         life--;
-        anim.SetTrigger("Damaged");
+        if(life > 0) anim.SetTrigger("Damaged");
+        mustPatrol = false;
     }
     void CheckColision()
     {

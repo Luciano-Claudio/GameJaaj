@@ -22,6 +22,7 @@ public class CharacterController : MonoBehaviour
     [SerializeField] private Sprite Fire1;
     [SerializeField] private Sprite Fire2;
     private SpriteRenderer Gun_Explosion;
+    private Light LightGun;
 
     private float _timeFadeSpawns;
     private float _startTimeFadeSpawns = .05f;
@@ -87,6 +88,7 @@ public class CharacterController : MonoBehaviour
         m_Rigidbody2D = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         Gun_Explosion = Gun.GetComponent<SpriteRenderer>();
+        LightGun = GetComponentInChildren<Light>();
 
         if (OnLandEvent == null)
             OnLandEvent = new UnityEvent();
@@ -163,6 +165,14 @@ public class CharacterController : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (hide)
+        {
+            LightGun.intensity = 0;
+        }
+        else if(LightGun.intensity == 0)
+        {
+            LightGun.intensity = 6.08f;
+        }
         bool wasGrounded = m_Grounded;
         m_Grounded = false;
         Collider2D[] colliders;
