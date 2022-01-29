@@ -23,7 +23,7 @@ public class Config : MonoBehaviour
     private AudioSource _audioS;
     void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player").GetComponent<CharacterController>();
+        player = GameObject.Find("Player").GetComponent<CharacterController>();
 
         //PlayerPrefs.DeleteAll();
         if (PlayerPrefs.GetInt("HasFullscreen") == 1)

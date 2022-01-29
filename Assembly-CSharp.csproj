@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <LangVersion>8.0</LangVersion>
+    <LangVersion>latest</LangVersion>
   </PropertyGroup>
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -53,11 +53,7 @@
     <UnityVersion>2020.3.25f1</UnityVersion>
   </PropertyGroup>
   <ItemGroup>
-    <Analyzer Include="C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="Assets\Scripts\Pause\PauseOptions.cs" />
-    <Compile Include="Assets\Scripts\PlayerMovement.cs" />
     <Compile Include="Assets\Scripts\Menu\Options\Options.cs" />
     <Compile Include="Assets\Scripts\Menu\Options\AudioBtn.cs" />
     <Compile Include="Assets\Scripts\Pause\Continue.cs" />
@@ -67,18 +63,15 @@
     <Compile Include="Assets\Scripts\Cameras\CamerasController.cs" />
     <Compile Include="Assets\Scripts\Menu\StartBtn.cs" />
     <Compile Include="Assets\Scripts\Pause\Pause.cs" />
-    <Compile Include="Assets\Scripts\Sing.cs" />
     <Compile Include="Assets\Scripts\Menu\Logo.cs" />
     <Compile Include="Assets\Scripts\Hole.cs" />
     <Compile Include="Assets\Scripts\Cameras\Subway\CameraTriggerStair.cs" />
     <Compile Include="Assets\Scripts\Fade.cs" />
     <Compile Include="Assets\Scripts\EnemyPath.cs" />
     <Compile Include="Assets\Scripts\Menu\Credits\Credits.cs" />
-    <Compile Include="Assets\Scripts\Parallax.cs" />
     <Compile Include="Assets\Scripts\Menu\BtnSound.cs" />
     <Compile Include="Assets\Scripts\CharacterController.cs" />
     <Compile Include="Assets\Scripts\Box.cs" />
-    <Compile Include="Assets\Scripts\Range.cs" />
     <Compile Include="Assets\Scripts\Bullet.cs" />
     <Compile Include="Assets\Scripts\Menu\AudioM.cs" />
     <Compile Include="Assets\Scripts\AllyBullet.cs" />

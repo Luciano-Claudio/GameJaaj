@@ -6,7 +6,7 @@ public class AllyBullet : MonoBehaviour
 {
 
     private float Speed = 30f;
-    private Transform player;
+    public Transform player;
     private int direction;
     private CharacterController controller;
     Vector2 dir;
@@ -15,7 +15,7 @@ public class AllyBullet : MonoBehaviour
     void Start()
     {
         rot = new Vector3(0, 0, 0);
-        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
+        player = GameObject.Find("Player").GetComponent<Transform>();
         controller = player.GetComponent<CharacterController>();
         direction = player.transform.localScale.x >= 0 ? 1 : -1;
 

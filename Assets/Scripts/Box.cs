@@ -16,7 +16,7 @@ public class Box : MonoBehaviour
 
     private void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player");
+        player = GameObject.Find("Player");
         playerCh = player.GetComponent<CharacterController>();
         anim = GetComponent<Animator>();
         trigger = GetComponent<BoxCollider2D>();

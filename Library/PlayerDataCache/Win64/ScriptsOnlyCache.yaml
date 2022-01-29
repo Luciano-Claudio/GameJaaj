@@ -10,20 +10,16 @@ ScriptsOnlyBuild:
     - CameraTriggerStair
     - CamerasController
     - CharacterController
-    - Config
     - Credits
     - EnemyPath
     - Fade
-    - Hittler
     - Hole
     - IsWall
     - Menu
     - Options
-    - Pause
-    - PauseOptions
-    - Sing
     - StartBtn
     - VideoBtn
+    - teste
     Cinemachine.dll:
     - Cinemachine.CinemachineBrain
     - Cinemachine.CinemachineConfiner
@@ -34,6 +30,7 @@ ScriptsOnlyBuild:
     - UnityEditor.U2D.Animation.BoneGizmo
     Unity.2D.IK.Editor.dll:
     - UnityEditor.U2D.IK.IKEditorManager
+    - UnityEditor.U2D.IK.IKGizmos
     Unity.2D.Tilemap.Editor.dll:
     - UnityEditor.Tilemaps.GridBrush
     - UnityEditor.Tilemaps.GridBrushEditor
@@ -81,8 +78,11 @@ ScriptsOnlyBuild:
     UnityEditor.Graphs.dll:
     - UnityEditor.Graphs.AnimationBlendTree.Graph
     - UnityEditor.Graphs.AnimationBlendTree.GraphGUI
+    - UnityEditor.Graphs.AnimationStateMachine.AnyStateNode
     - UnityEditor.Graphs.AnimationStateMachine.Graph
     - UnityEditor.Graphs.AnimationStateMachine.GraphGUI
+    - UnityEditor.Graphs.AnimationStateMachine.StateMachineNode
+    - UnityEditor.Graphs.AnimationStateMachine.StateNode
     - UnityEditor.Graphs.AnimatorControllerTool
     UnityEditor.TestRunner.dll:
     - UnityEditor.TestTools.TestRunner.Api.CallbacksHolder
@@ -108,139 +108,6 @@ ScriptsOnlyBuild:
     - UnityEngine.UI.Toggle
     - UnityEngine.UI.VerticalLayoutGroup
   sceneClasses:
-    Assets/Scenes/Level1.unity:
-    - Class: 1
-      Script: {instanceID: 0}
-    - Class: 4
-      Script: {instanceID: 0}
-    - Class: 20
-      Script: {instanceID: 0}
-    - Class: 21
-      Script: {instanceID: 0}
-    - Class: 28
-      Script: {instanceID: 0}
-    - Class: 48
-      Script: {instanceID: 0}
-    - Class: 50
-      Script: {instanceID: 0}
-    - Class: 58
-      Script: {instanceID: 0}
-    - Class: 61
-      Script: {instanceID: 0}
-    - Class: 62
-      Script: {instanceID: 0}
-    - Class: 68
-      Script: {instanceID: 0}
-    - Class: 70
-      Script: {instanceID: 0}
-    - Class: 74
-      Script: {instanceID: 0}
-    - Class: 81
-      Script: {instanceID: 0}
-    - Class: 82
-      Script: {instanceID: 0}
-    - Class: 83
-      Script: {instanceID: 0}
-    - Class: 91
-      Script: {instanceID: 0}
-    - Class: 95
-      Script: {instanceID: 0}
-    - Class: 104
-      Script: {instanceID: 0}
-    - Class: 108
-      Script: {instanceID: 0}
-    - Class: 114
-      Script: {instanceID: 844}
-    - Class: 114
-      Script: {instanceID: 1676}
-    - Class: 114
-      Script: {instanceID: 1678}
-    - Class: 114
-      Script: {instanceID: 1680}
-    - Class: 114
-      Script: {instanceID: 1682}
-    - Class: 114
-      Script: {instanceID: 1738}
-    - Class: 114
-      Script: {instanceID: 1910}
-    - Class: 114
-      Script: {instanceID: 2480}
-    - Class: 114
-      Script: {instanceID: 2688}
-    - Class: 114
-      Script: {instanceID: 2756}
-    - Class: 114
-      Script: {instanceID: 2820}
-    - Class: 114
-      Script: {instanceID: 2896}
-    - Class: 114
-      Script: {instanceID: 3238}
-    - Class: 114
-      Script: {instanceID: 3516}
-    - Class: 114
-      Script: {instanceID: 3616}
-    - Class: 114
-      Script: {instanceID: 3668}
-    - Class: 114
-      Script: {instanceID: 4126}
-    - Class: 114
-      Script: {instanceID: 4422}
-    - Class: 114
-      Script: {instanceID: 4980}
-    - Class: 114
-      Script: {instanceID: 5250}
-    - Class: 114
-      Script: {instanceID: 5340}
-    - Class: 114
-      Script: {instanceID: 5464}
-    - Class: 114
-      Script: {instanceID: 5906}
-    - Class: 114
-      Script: {instanceID: 5946}
-    - Class: 114
-      Script: {instanceID: 6120}
-    - Class: 114
-      Script: {instanceID: 6408}
-    - Class: 114
-      Script: {instanceID: 6618}
-    - Class: 114
-      Script: {instanceID: 6744}
-    - Class: 114
-      Script: {instanceID: 6804}
-    - Class: 114
-      Script: {instanceID: 7414}
-    - Class: 114
-      Script: {instanceID: 7526}
-    - Class: 114
-      Script: {instanceID: 7678}
-    - Class: 115
-      Script: {instanceID: 0}
-    - Class: 128
-      Script: {instanceID: 0}
-    - Class: 157
-      Script: {instanceID: 0}
-    - Class: 196
-      Script: {instanceID: 0}
-    - Class: 212
-      Script: {instanceID: 0}
-    - Class: 213
-      Script: {instanceID: 0}
-    - Class: 222
-      Script: {instanceID: 0}
-    - Class: 223
-      Script: {instanceID: 0}
-    - Class: 224
-      Script: {instanceID: 0}
-    - Class: 251
-      Script: {instanceID: 0}
-    - Class: 19719996
-      Script: {instanceID: 0}
-    - Class: 156049354
-      Script: {instanceID: 0}
-    - Class: 483693784
-      Script: {instanceID: 0}
-    - Class: 1839735485
-      Script: {instanceID: 0}
     Assets/Scenes/Level2.unity:
     - Class: 1
       Script: {instanceID: 0}
@@ -289,8 +156,6 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 3160}
     - Class: 114
-      Script: {instanceID: 3546}
-    - Class: 114
       Script: {instanceID: 3616}
     - Class: 114
       Script: {instanceID: 3668}
@@ -314,6 +179,8 @@ ScriptsOnlyBuild:
       Script: {instanceID: 6804}
     - Class: 114
       Script: {instanceID: 7526}
+    - Class: 114
+      Script: {instanceID: 79174}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 157
@@ -588,12 +455,6 @@ ScriptsOnlyBuild:
     assemblyName: Unity.RenderPipelines.Universal.Runtime.dll
     namespaceName: UnityEngine.Rendering.Universal
     className: DepthOfField
-  - hash:
-      serializedVersion: 2
-      Hash: cc71f4a47d24ef71adca8a073eabb09a
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: PlayerMovement
   - hash:
       serializedVersion: 2
       Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
@@ -890,12 +751,6 @@ ScriptsOnlyBuild:
     className: PlayerQuitHandler
   - hash:
       serializedVersion: 2
-      Hash: c372f32735fe913b6bb77795a308a783
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: Sing
-  - hash:
-      serializedVersion: 2
       Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
     assemblyName: UnityEngine.UI.dll
     namespaceName: UnityEngine.EventSystems
@@ -1088,7 +943,7 @@ ScriptsOnlyBuild:
     className: Renderer2DData
   - hash:
       serializedVersion: 2
-      Hash: 235e9c464aff0e23523e7213156a983e
+      Hash: c911304db23085a5566c95be0a554b55
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: EnemyPath
@@ -1146,12 +1001,6 @@ ScriptsOnlyBuild:
     assemblyName: Unity.2D.Animation.Runtime.dll
     namespaceName: UnityEngine.U2D.Animation
     className: BufferManager
-  - hash:
-      serializedVersion: 2
-      Hash: c372f32735fe913b6bb77795a308a783
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: Parallax
   - hash:
       serializedVersion: 2
       Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
@@ -1346,12 +1195,6 @@ ScriptsOnlyBuild:
     className: CanvasScaler
   - hash:
       serializedVersion: 2
-      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: Range
-  - hash:
-      serializedVersion: 2
       Hash: df21ffd1864551a3e43410f28754a73e
     assemblyName: Cinemachine.dll
     namespaceName: Cinemachine
@@ -1514,7 +1357,7 @@ ScriptsOnlyBuild:
     className: PlayableTrack
   - hash:
       serializedVersion: 2
-      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+      Hash: 65b3a3b9a7779d539ec75a3ceddebdba
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: AllyBullet
@@ -1764,9 +1607,14 @@ ScriptsOnlyBuild:
     assemblyName: Unity.2D.IK.Runtime.dll
     namespaceName: UnityEngine.U2D.IK
     className: FabrikSolver2D
+  - hash:
+      serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: teste
   platform: 19
   scenePathNames:
   - Assets/Scenes/Menu.unity
-  - Assets/Scenes/Level1.unity
   - Assets/Scenes/Level2.unity
-  playerPath: C:/Users/engli/Desktop/JogoTeste/Arqui-Inimigo.exe
+  playerPath: C:/Users/engli/Desktop/play/Arqui-Inimigo.exe

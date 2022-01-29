@@ -423,6 +423,7 @@ MonoBehaviour:
   FootTwo: {fileID: 2036665878}
   Gun: {fileID: 58425001}
   Bullet: {fileID: 3604190285717194226, guid: f87d54615f20a284e8c6bd9bb92bea8f, type: 3}
+  Player: {fileID: 7309754975082689079, guid: 9459b4221aee41645b5ecfbd776a85b5, type: 3}
   CapsuleCo1: {fileID: 7116628928404478800}
   CapsuleCo2: {fileID: 889119013}
   BoxCo: {fileID: 5335187941117135332}
@@ -438,7 +439,6 @@ MonoBehaviour:
   _wall: 0
   _obstacleHole: 0
   _fastChase: 0
-  _chase: 0
   Spawn: 0
 --- !u!95 &577980295
 Animator:

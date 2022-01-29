@@ -13,7 +13,6 @@ public class CharacterController : MonoBehaviour
     [SerializeField] private Transform m_GroundCheckTwo;                           // Uma marcação de posição onde verifica se o jogador está no chão.
     [SerializeField] private Collider2D m_CrouchDisableCollider;                // Um colisor que será desativado ao agachar
     [SerializeField] private int Life = 10;
-    private int _lifeAux = 10;
     private bool _dead = false;
 
 
@@ -43,7 +42,6 @@ public class CharacterController : MonoBehaviour
 
 
     private bool _isJump = false;
-    private bool _isJumping = false;
     private bool prepairOn = false;
     private bool _fall = false;
     private bool fallOn = false;
@@ -121,7 +119,7 @@ public class CharacterController : MonoBehaviour
                 if (Input.GetButtonDown("Jump") && _jumpTemp <= 0 && !_isCrouch)
                 {
                     _jumpTemp = _jumpCount;
-                    _isJump = _isJumping = true;
+                    _isJump =  true;
 
                 }
                 else if (_jumpTemp > 0) _jumpTemp -= Time.deltaTime;
@@ -239,7 +237,7 @@ public class CharacterController : MonoBehaviour
             animator.SetBool("Fall", true);
             yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length / 2);
             animator.SetBool("Fall", false);
-            _fall = fallOn = _isJumping = false;
+            _fall = fallOn =  false;
         }
     }
 

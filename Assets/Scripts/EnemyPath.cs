@@ -6,7 +6,7 @@ public class EnemyPath : MonoBehaviour
 {
     public Transform hasGround, hasWall, FootOne, FootTwo, Gun;
     public GameObject Bullet;
-    private GameObject Player;
+    public GameObject Player;
     [SerializeField] private CapsuleCollider2D CapsuleCo1;
     [SerializeField] private CapsuleCollider2D CapsuleCo2;
     [SerializeField] private BoxCollider2D BoxCo;
@@ -40,7 +40,6 @@ public class EnemyPath : MonoBehaviour
     private bool _fall = false;
     private bool _prepairJump = false;
     private bool prepairOn = false;
-    [SerializeField] private bool _chase = false;
     private float changeChase = .2f;
     private bool _chaseChange = false;
     private bool _canChaseChange = false;
@@ -51,12 +50,9 @@ public class EnemyPath : MonoBehaviour
     public bool Spawn = false;
 
 
-    void Awake()
-    {
-        Player = GameObject.FindGameObjectWithTag("Player");
-    }
     void Start()
     {
+        Player = GameObject.Find("Player");
         rb = GetComponent<Rigidbody2D>();
         move = 1;
         mustPatrol = true;
@@ -105,7 +101,6 @@ public class EnemyPath : MonoBehaviour
         if (mustPatrol)
         {
             int i;
-            _chase = false;
             CheckColision();
             i = Random.Range(1, 6000);
             if (i == 1 || _hole || _wall)
@@ -254,7 +249,6 @@ public class EnemyPath : MonoBehaviour
 
     void Chase()
     {
-        _chase = true;
         _chaseChange = _fastChase;
         _fastChase = _distToPlayer > ViewRange ? true : false;
         if(_chaseChange != _fastChase && changeChase > 0)

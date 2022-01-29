@@ -21,7 +21,7 @@ public class Hittler : MonoBehaviour
     void Start()
     {
         animator = GetComponent<Animator>();
-        Player = GameObject.FindGameObjectWithTag("Player");
+        Player = GameObject.Find("Player");
         playerControl = Player.GetComponent<CharacterController>();
     }
 

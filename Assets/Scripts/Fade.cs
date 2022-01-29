@@ -10,7 +10,7 @@ public class Fade : MonoBehaviour
     SpriteRenderer spr;
     void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player").transform;
+        player = GameObject.Find("Player").transform;
         anim = GetComponent<Animator>();
         spr = GetComponent<SpriteRenderer>();
 
