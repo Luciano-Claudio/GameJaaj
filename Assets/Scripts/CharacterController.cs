@@ -38,7 +38,7 @@ public class CharacterController : MonoBehaviour
 
 
 
-    public float runSpeed = 20f;
+    public float runSpeed = 40f;
     float horizontalMove = 0f;
 
 
@@ -215,18 +215,18 @@ public class CharacterController : MonoBehaviour
     private IEnumerator Fire()
     {
         fireOn = true;
-        if (m_Rigidbody2D.velocity.x != 0)
+        if (m_Rigidbody2D.velocity != Vector2.zero)
         {
             Gun_Explosion.sprite = Fire1;
-            yield return new WaitForSeconds(.02f);
+            yield return new WaitForSeconds(.05f);
             Gun_Explosion.sprite = Fire2;
-            yield return new WaitForSeconds(.02f);
+            yield return new WaitForSeconds(.05f);
             Gun_Explosion.sprite = null;
         }
-        else animator.SetBool("Fire", true);
+        animator.SetBool("Fire", true);
         GameObject bullet = Instantiate(Bullet);
         bullet.transform.position = Gun.position;
-        yield return new WaitForSeconds(.26f);
+        yield return new WaitForSeconds(.2f);
         animator.SetBool("Fire", false);
         fireOn = false;
     }

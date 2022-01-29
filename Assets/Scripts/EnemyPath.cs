@@ -24,7 +24,7 @@ public class EnemyPath : MonoBehaviour
     [SerializeField] private float m_JumpForce = 500f;
     [SerializeField] private float yDist;
     private float _velMove = 2f;
-    private float _distToPlayer;
+    private float _distToPlayer = 100;
     private Rigidbody2D rb;
     private int move;
     private bool mustPatrol;
@@ -70,6 +70,7 @@ public class EnemyPath : MonoBehaviour
         if (_dead)
         {
             anim.SetBool("IsDead", true);
+            anim.SetTrigger("Dead");
             spr.sortingOrder = 3;
             this.enabled = CapsuleCo1.enabled = CapsuleCo2.enabled = false;
             BoxCo.enabled = true;
@@ -82,6 +83,7 @@ public class EnemyPath : MonoBehaviour
 
         if (_prepairJump && IsGround() && !prepairOn) StartCoroutine(PrepairJump());
         else if (_fall && IsGround() && !fallOn) StartCoroutine(Fall());
+        
     }
     void FixedUpdate()
     {
@@ -122,18 +124,24 @@ public class EnemyPath : MonoBehaviour
         else
         {
             if ((Player.transform.position.x > transform.position.x && move < 0)
-                       || (Player.transform.position.x < transform.position.x && move > 0))
+                       || (Player.transform.position.x < transform.position.x && move > 0) && _distToPlayer > 1)
                 Flip();
 
             if (_distToPlayer <= ShootRange && Mathf.Abs(transform.position.y - Player.transform.position.y) <= yDist && !_wall)
             {
                 if (IsGround())
                 {
-                    if (!shootOn)
-                        StartCoroutine(Shoot());
+                    if (_distToPlayer > 1)
+                    {
+                        if (!shootOn) StartCoroutine(Shoot());
+                    }
+                    else
+                    {
+                        Run();
+                    }
                 }
             }
-            else if (_distToPlayer > ShootRange || Mathf.Abs(transform.position.y - Player.transform.position.y) >= yDist || _wall)
+            else if ((_distToPlayer > ShootRange || Mathf.Abs(transform.position.y - Player.transform.position.y) >= yDist || _wall) && _distToPlayer > 1)
             {
                 CheckColision();
                 Chase();
@@ -308,5 +316,16 @@ public class EnemyPath : MonoBehaviour
         }  
     }
 
+    void Run()
+    {
+        CheckColision();
+        if (_wall || _hole || _obstacleHole)
+        {
+            Flip();
+        }
 
+
+        rb.velocity = new Vector2(_velMove * 2 * move, rb.velocity.y);
+
+    }
 }

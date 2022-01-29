@@ -16,7 +16,7 @@ public class Hittler : MonoBehaviour
     private CharacterController playerControl;
     [SerializeField] private int life = 10;
     private bool _dead = false;
-    [SerializeField] private float time = 1f;
+    [SerializeField] private float time = 2f;
     [SerializeField]private float _distToPlayer;
     void Start()
     {
@@ -31,6 +31,7 @@ public class Hittler : MonoBehaviour
         if (_dead)
         {
             animator.SetBool("IsDead", true);
+            animator.SetTrigger("Dead");
             this.enabled = false;
         }
         _distToPlayer = Vector2.Distance(transform.position, Player.transform.position);
@@ -51,7 +52,7 @@ public class Hittler : MonoBehaviour
                 {
                     StartCoroutine(Call());
                 }
-                time = Random.Range(1, 4);
+                time = Random.Range(2, 7);
             }
             else
             {
